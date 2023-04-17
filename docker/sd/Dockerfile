@@ -41,15 +41,14 @@ RUN apt-get update && apt install fonts-dejavu-core rsync git jq moreutils -y &&
 
 
 RUN --mount=type=cache,target=/root/.cache/pip <<EOF
-git clone https://github.com/moldwebs/stable-diffusion-webui.git
-cd stable-diffusion-webui
-# git reset --hard d7aec59c4eb02f723b3d55c6f927a42e97acd679
+git clone https://github.com/moldwebs/sdwebui.git
+cd sdwebui
 pip install -r requirements_versions.txt
 EOF
 
 
 RUN --mount=type=cache,target=/root/.cache/pip <<EOF
-cd stable-diffusion-webui/services
+cd sdwebui/services
 chmod +x download.sh
 # ./download.sh
 EOF
@@ -58,7 +57,7 @@ RUN --mount=type=cache,target=/root/.cache/pip  \
   --mount=type=bind,from=xformers,source=/wheel.whl,target=/xformers-0.0.15-cp310-cp310-linux_x86_64.whl \
   pip install triton /xformers-0.0.15-cp310-cp310-linux_x86_64.whl
 
-ENV ROOT=/stable-diffusion-webui
+ENV ROOT=/sdwebui
 
 
 # ---------------------
@@ -94,13 +93,13 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN apt-get -y install libgoogle-perftools-dev && apt-get clean
 ENV LD_PRELOAD=libtcmalloc.so
 
-ARG SHA=27e319dc4f09a2f040043948e5c52965976f8491
-RUN --mount=type=cache,target=/root/.cache/pip <<EOF
-cd stable-diffusion-webui
-git fetch
-git reset --hard ${SHA}
-pip install -r requirements_versions.txt
-EOF
+# ARG SHA=27e319dc4f09a2f040043948e5c52965976f8491
+# RUN --mount=type=cache,target=/root/.cache/pip <<EOF
+# cd sdwebui
+# git fetch
+# git reset --hard ${SHA}
+# pip install -r requirements_versions.txt
+# EOF
 
 RUN --mount=type=cache,target=/root/.cache/pip  pip install -U opencv-python-headless
 
