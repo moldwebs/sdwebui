@@ -7,12 +7,12 @@ mkdir -vp models/Stable-diffusion models/ControlNet models/Codeformer models/GFP
 
 echo "Downloading, this might take a while..."
 
-aria2c -x 10 --disable-ipv6 --input-file links.txt --dir /data --continue
+aria2c -x 10 --disable-ipv6 --input-file links.txt --dir models --continue
 
-echo "Checking SHAs..."
+#echo "Checking SHAs..."
 
-parallel --will-cite -a checksums.sha256 "echo -n {} | sha256sum -c"
+#parallel --will-cite -a checksums.sha256 "echo -n {} | sha256sum -c"
 
-cat <<EOF
-ls -la
-EOF
+#ls -la
+
+echo "END"
