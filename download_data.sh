@@ -7,7 +7,7 @@ mkdir -vp models/Stable-diffusion models/ControlNet models/Codeformer models/GFP
 
 echo "Downloading, this might take a while..."
 
-aria2c -x 10 --disable-ipv6 --input-file links.txt --dir models --continue
+aria2c -x 10 --disable-ipv6 --input-file download_data.txt --dir models --continue
 
 #echo "Checking SHAs..."
 

@@ -48,8 +48,8 @@ EOF
 
 
 RUN --mount=type=cache,target=/root/.cache/pip <<EOF
-cd sdwebui/services
-chmod +x download.sh
+cd sdwebui
+chmod +x download_data.sh
 # ./download.sh
 EOF
 
