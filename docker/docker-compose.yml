@@ -7,7 +7,7 @@ services:
       restart: unless-stopped
       build: ./sd
       ports:
-        - "7560:7560"
+        - "7860:7560"
       stop_signal: SIGINT
       deploy:
         resources:
@@ -16,3 +16,14 @@ services:
                 - driver: nvidia
                   device_ids: ['0']
                   capabilities: [gpu]
+
+    portainer:
+      container_name: service_portainer
+      restart: unless-stopped
+      image: portainer/portainer:alpine
+      ports:
+          - "7861:9000"
+      volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - ./volumes/portainer:/data
+          
